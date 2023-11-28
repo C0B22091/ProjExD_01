@@ -3,7 +3,6 @@ import pygame as pg
 import random
 
 WIDTH, HEIGHT = 1200, 600
-
 delta = {pg.K_UP:(0, -5), pg.K_DOWN:(0, +5), 
          pg.K_LEFT:(-5, 0), pg.K_RIGHT:(+5, 0)}
 
@@ -53,16 +52,13 @@ def main():
         (-5, +5):pg.transform.rotozoom(kk_img, 45, 1.0)
         }
 
-
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
                 return
-        
         if kk_rct.colliderect(img_rct):  # 練習5 衝突判定
             print("Game Over")
             return
-        
         key_lst = pg.key.get_pressed() # 練習3 こうかとんの総移動距離
         sum_mv = [0, 0]
         for k, tpl in delta.items():
