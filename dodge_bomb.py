@@ -7,6 +7,7 @@ WIDTH, HEIGHT = 1200, 600
 delta = {pg.K_UP:(0, -5), pg.K_DOWN:(0, +5), 
          pg.K_LEFT:(-5, 0), pg.K_RIGHT:(+5, 0)}
 
+
 def check_bound(rct: pg.Rect) -> tuple[bool, bool]:
     """
     オブジェクトが画面内にいるかどうか判定。
@@ -39,6 +40,15 @@ def main():
     vx = +5  # 練習2
     vy = +5  # 練習2
     tmr = 0
+    rolling_kk = {(0, +5):pg.transform.rotozoom(kk_img, 90, 1.0),
+                  (+5, +5):pg.transform.rotozoom(kk_img, 45, 1.0),
+                  (+5, 0):pg.transform.rotozoom(kk_img, 0, 1.0),
+                  (+5, -5):pg.transform.rotozoom(kk_img, -45, 1.0),
+                  (0, -5):pg.transform.rotozoom(kk_img, -90, 1.0),
+                  (-5, -5):pg.transform.rotozoom(kk_img, -45, 1.0),
+                  (-5, 0):pg.transform.rotozoom(kk_img, 0, 1.0),
+                  (-5, +5):pg.transform.rotozoom(kk_img, 45, 1.0)}
+
     while True:
         for event in pg.event.get():
             if event.type == pg.QUIT: 
@@ -54,6 +64,10 @@ def main():
             if key_lst[k]:  # キーが押されたら
                 sum_mv[0] += tpl[0]
                 sum_mv[1] += tpl[1]
+            if (tuple(sum_mv) in rolling_kk):  # 演習1 向きが変わりそうなら
+                kk_img = rolling_kk[tuple(sum_mv)]
+            if sum_mv[0] > 0:  # 演習1 左右方向転換したら
+                kk_img = pg.transform.flip(kk_img, True, False)
 
         screen.blit(bg_img, [0, 0])
         kk_rct.move_ip(sum_mv)
