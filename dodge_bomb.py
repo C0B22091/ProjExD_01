@@ -37,17 +37,22 @@ def main():
     img_rct = bb_img.get_rect()  # 練習1
     img_rct.centerx = random.randint(0, WIDTH)  # 練習1
     img_rct.centery = random.randint(0, HEIGHT)  # 練習1
+    accs = [a for a in range(1, 11)]  # 演習2 加速度のリスト
+    #avx, avy = accs[min(tmr//2, 9)], accs[min(tmr//2, 9)]  # 演習2
     vx = +5  # 練習2
     vy = +5  # 練習2
     tmr = 0
-    rolling_kk = {(0, +5):pg.transform.rotozoom(kk_img, 90, 1.0),
-                  (+5, +5):pg.transform.rotozoom(kk_img, 45, 1.0),
-                  (+5, 0):pg.transform.rotozoom(kk_img, 0, 1.0),
-                  (+5, -5):pg.transform.rotozoom(kk_img, -45, 1.0),
-                  (0, -5):pg.transform.rotozoom(kk_img, -90, 1.0),
-                  (-5, -5):pg.transform.rotozoom(kk_img, -45, 1.0),
-                  (-5, 0):pg.transform.rotozoom(kk_img, 0, 1.0),
-                  (-5, +5):pg.transform.rotozoom(kk_img, 45, 1.0)}
+    rolling_kk = {
+        (0, +5):pg.transform.rotozoom(kk_img, 90, 1.0),
+        (+5, +5):pg.transform.rotozoom(kk_img, 45, 1.0),
+        (+5, 0):pg.transform.rotozoom(kk_img, 0, 1.0),
+        (+5, -5):pg.transform.rotozoom(kk_img, -45, 1.0),
+        (0, -5):pg.transform.rotozoom(kk_img, -90, 1.0),
+        (-5, -5):pg.transform.rotozoom(kk_img, -45, 1.0),
+        (-5, 0):pg.transform.rotozoom(kk_img, 0, 1.0),
+        (-5, +5):pg.transform.rotozoom(kk_img, 45, 1.0)
+        }
+
 
     while True:
         for event in pg.event.get():
@@ -82,7 +87,7 @@ def main():
             vy *= -1
         img_rct.move_ip(vx, vy)
         screen.blit(bb_img, img_rct)
-    
+
         pg.display.update()
         tmr += 1
         clock.tick(50)
@@ -93,5 +98,3 @@ if __name__ == "__main__":
     main()
     pg.quit()
     sys.exit()
-
-
