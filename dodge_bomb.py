@@ -44,6 +44,10 @@ def main():
             if event.type == pg.QUIT: 
                 return
         
+        if kk_rct.colliderect(img_rct):  # 練習5 衝突判定
+            print("Game Over")
+            return
+        
         key_lst = pg.key.get_pressed() # 練習3 こうかとんの総移動距離
         sum_mv = [0, 0]
         for k, tpl in delta.items():
