@@ -14,9 +14,12 @@ def main():
     clock = pg.time.Clock()
     bb_img = pg.Surface((20, 20))  # 練習1 透明のSurface
     pg.draw.circle(bb_img, (255, 0, 0), (10, 10), 10)  # 練習1 赤い半径10の円を描画
+    bb_img.set_colorkey((0, 0, 0))  # 練習1 黒を透過
     img_rct = bb_img.get_rect()  # 練習1
     img_rct.centerx = random.randint(0, WIDTH)  # 練習1
     img_rct.centery = random.randint(0, HEIGHT)  # 練習1
+    vx = +5  # 練習2
+    vy = +5  # 練習2
     tmr = 0
     while True:
         for event in pg.event.get():
@@ -25,6 +28,7 @@ def main():
 
         screen.blit(bg_img, [0, 0])
         screen.blit(kk_img, [900, 400])
+        img_rct.move_ip((vx, vy))  # 練習2
         screen.blit(bb_img, img_rct)
     
         pg.display.update()
